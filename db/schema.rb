@@ -10,15 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_26_230555) do
+ActiveRecord::Schema.define(version: 2021_03_26_233142) do
+
+  create_table "players", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "age"
+    t.decimal "market_value"
+    t.string "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "teams", force: :cascade do |t|
-    t.integer "budget"
     t.string "name"
     t.string "country"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "initial_value"
     t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
@@ -28,6 +38,7 @@ ActiveRecord::Schema.define(version: 2021_03_26_230555) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "budget"
   end
 
 end
