@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  budget: 1
+  name: MyString
+  country: MyString
+  user: one
+
+two:
+  budget: 1
+  name: MyString
+  country: MyString
+  user: two
