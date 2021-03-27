@@ -1,8 +1,20 @@
 default: &default
   settings:
-    init:
+    user:
       budget: 5000.000
-      team_value: 1000.000
+    player:
+      age:
+        min: 18
+        max: 35
+      market_value: 1000.000
+    player_positions:
+      goalkeeper: 3
+      defender: 6
+      midfield: 6
+      attacker: 5
+
+
+
 
 
 development:
