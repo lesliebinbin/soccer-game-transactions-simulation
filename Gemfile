@@ -67,3 +67,9 @@ gem "devise", "~> 4.7"
 gem "haml-rails", "~> 2.0"
 
 gem "webpacker", "~> 5.2"
+
+gem "pandoc-ruby", "~> 2.1"
+
+gem "devise-jwt", "~> 0.8.1"
+
+gem "cancancan", "~> 3.2"

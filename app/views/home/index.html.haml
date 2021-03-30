@@ -1,2 +1,8 @@
-%h1 Home
-%p This is the home page
+%h1 Home Page
+- if current_user.nil?
+  = link_to new_user_session_path, class: 'login-button' do
+    Sign in
+- else
+  %p Welcome To The Soccer Game App
+  = link_to destroy_user_session_path, method: :delete do
+    Log out
