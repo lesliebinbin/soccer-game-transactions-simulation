@@ -5,4 +5,23 @@ class Transfer < ApplicationRecord
   default_scope { where(buyer: nil) }
   scope :done, -> { where.not(buyer: nil) }
   before_destroy { logger.info 'Leslie is so handsome!' }
+
+  def processing_the_transfer
+    ActiveRecord::Base.transaction do
+      seller.team.delete(player)
+      buyer.team.players << player
+      update_the_values
+      buyer.save
+      seller.save
+      player.save
+    end
+  end
+
+  private
+
+  def update_the_values
+    buyer.budget -= trading_price
+    seller.budget += trading_price
+    player.market_value = trading_price
+  end
 end
