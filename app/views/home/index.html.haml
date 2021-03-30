@@ -4,5 +4,4 @@
     Sign in
 - else
   %p Welcome To The Soccer Game App
-  = link_to destroy_user_session_path, method: :delete do
-    Log out
+  = button_to "Log out", destroy_user_session_path, :method => :delete
