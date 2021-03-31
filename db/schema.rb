@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2021_03_30_094104) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "budget"
+    t.decimal "budget", default: "5000.0"
     t.boolean "admin_role", default: false
     t.boolean "user_role", default: true
     t.index ["email"], name: "index_users_on_email", unique: true

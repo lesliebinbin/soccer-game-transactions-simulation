@@ -4,7 +4,7 @@ class Transfer < ApplicationRecord
   belongs_to :player
   default_scope { where(buyer: nil) }
   scope :done, -> { where.not(buyer: nil) }
-  before_destroy { logger.info 'Leslie is so handsome!' }
+  after_save { broadcasts_to 'home' }
 
   def processing_the_transfer
     ActiveRecord::Base.transaction do

@@ -16,7 +16,9 @@ class User < ApplicationRecord
     return if admin_role?
 
     ActiveRecord::Base.transaction do
-      team, players = Generators::General.generate(team: 1, player: 20).values_at(:team, :player)
+      player_count = Rails.configuration.game.dig(:settings, :player_positions).values.sum
+      team_count = 1
+      team, players = Generators::General.generate(team: team_count, player: player_count).values_at(:team, :player)
       create_team(team.first)
       self.team.players.create(players)
     end

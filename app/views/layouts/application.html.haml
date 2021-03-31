@@ -12,5 +12,5 @@
   %body
     .notice= flash[:notice]
     .alert= flash[:alert]
-    = yield
     = yield :admin_dashboard if current_user&.admin_role?
+    = yield

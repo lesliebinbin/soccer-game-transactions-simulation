@@ -1,7 +1,20 @@
-%h1 Home Page
-- if current_user.nil?
-  = link_to new_user_session_path, class: 'login-button' do
-    Sign in
-- else
-  %p Welcome To The Soccer Game App
-  = button_to "Log out", destroy_user_session_path, :method => :delete
+= turbo_stream_from 'home'
+= turbo_frame_tag 'home' do
+  - if current_user.nil?
+    = link_to 'Sign in', new_user_session_path, class: 'login-button', target: :_top
+    %p Don't have an account yet?
+    = link_to 'Sign up now', new_user_registration_path, class: 'sign up button', target: :_top
+  - else
+    %p Welcome To The Soccer Game App
+    %h1 Current Budget #{current_user.budget}
+    %h2 Team Info
+    .team
+      = render current_user.team
+    %h3 Players Info
+    .players
+      %p Total Players Count: #{current_user.players.count}
+      %p Total Players Market Value: #{current_user.players.sum(:market_value)}
+      %ul
+        = render current_user.players
+
+    = link_to "Log out", destroy_user_session_path, :method => :delete
