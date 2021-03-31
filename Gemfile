@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '6.1.3'
@@ -76,4 +75,6 @@ gem "cancancan", "~> 3.2"
 
 gem "rails_admin", "~> 2.1"
 
-gem "hotwire-rails", "~> 0.1.3"
+gem "turbolinks", "~> 5.2"
+
+gem "stimulus_reflex", "~> 3.4"

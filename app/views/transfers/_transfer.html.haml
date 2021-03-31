@@ -1,8 +1,8 @@
 = form_for transfer, target: :_top do |f|
   = f.label :seller
-  = f.text_field :seller, readonly: true, value: current_user.id
+  = f.text_field :seller, readonly: true, value: user_id
   = f.label :player
-  = f.collection_select :player, current_user.players, :id, :brief_info
+  = f.collection_select :player, players , :id, :brief_info
   = f.label :price
   = f.number_field :price
   = f.submit 'Add A New Transfer'

@@ -1,5 +1,6 @@
 class Player < ApplicationRecord
   belongs_to :team
+  scope :not_on_trade, -> { where(on_trade: false) }
 
   def current_employer
     team.user
@@ -8,5 +9,4 @@ class Player < ApplicationRecord
   def brief_info
     "#{first_name} #{last_name}, position: #{position}, market_value: #{market_value}"
   end
-
 end

@@ -15,11 +15,12 @@
 // const imagePath = (name) => images(name, true)
 
 import Rails from "@rails/ujs";
-import "@hotwired/turbo-rails"
+import Turbolinks from "turbolinks";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 
 Rails.start();
 ActiveStorage.start();
+Turbolinks.start();
 
 import "controllers"

@@ -16,8 +16,6 @@ class User < ApplicationRecord
     ActiveRecord::Base.transaction do
       player = Player.find(transfer.player_id)
       seller = User.find(transfer.seller_id)
-      seller.team.players.delete(player)
-      team.players << player
       update_the_values(transfer.price, self, seller, player)
       transfer.buyer_id = id
       transfer.save!
@@ -27,13 +25,14 @@ class User < ApplicationRecord
   private
 
   def update_the_values(trading_price, buyer, seller, player)
+    player.team_id = buyer.team.id
     buyer.budget -= trading_price
     seller.budget += trading_price
     player.market_value = trading_price
-    buyer.save!
-    seller.save!
-    buyer.team.save!
-    seller.team.save!
+    buyer.save
+    seller.save
+    buyer.team.save
+    seller.team.save
     player.save!
   end
 
