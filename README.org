@@ -1,0 +1,31 @@
+* Soccer Game App
+** Login
+   - vi curl
+     1. Retrieve The JWT Token First
+        #+begin_src restclient
+          POST http://localhost:3000/users/sign_in.json
+          Content-Type: application/json
+
+          {
+          "user":{
+
+            "email":"zhibin.huang@uqconnect.edu.au",
+            "password":"Woainvren1"
+          }
+          }
+        #+end_src
+
+        #+RESULTS:
+        #+BEGIN_SRC js
+        {
+          "error": "You need to sign in or sign up before continuing."
+        }
+        // POST http://localhost:3000/users/sign_in.json
+        // HTTP/1.1 401 Unauthorized
+        // Content-Type: application/json; charset=utf-8
+        // Cache-Control: no-cache
+        // X-Request-Id: f90e9aa4-6fd7-45cf-980c-2f05e7fd1d18
+        // X-Runtime: 0.260847
+        // Transfer-Encoding: chunked
+        // Request duration: 0.266652s
+        #+END_SRC
