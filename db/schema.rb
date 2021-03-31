@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_30_094104) do
+ActiveRecord::Schema.define(version: 2021_03_31_041511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 2021_03_30_094104) do
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "trading_price"
     t.index ["buyer_id"], name: "index_transfers_on_buyer_id"
     t.index ["player_id"], name: "index_transfers_on_player_id"
     t.index ["seller_id"], name: "index_transfers_on_seller_id"
