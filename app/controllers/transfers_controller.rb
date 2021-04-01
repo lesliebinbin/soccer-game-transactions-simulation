@@ -30,7 +30,7 @@ class TransfersController < ApplicationController
         format.json { render json: { notice: 'Transfer successfully created!' } }
       else
         format.html { redirect_to root_path, alert: t.errors }
-        format.json { render json: { errors: t.errors } }
+        format.json { render json: { errors: t.errors }, status: :not_acceptable }
       end
     end
   end
