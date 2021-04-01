@@ -1,5 +1,9 @@
 class TransfersController < ApplicationController
   before_action :check_access
+  def index
+    render json: Transfer.all
+  end
+
   def new
     @transfer = Transfer.new
   end
