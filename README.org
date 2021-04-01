@@ -2,30 +2,36 @@
 ** Login
    - vi curl
      1. Retrieve The JWT Token First
-        #+begin_src restclient
-          POST http://localhost:3000/users/sign_in.json
-          Content-Type: application/json
-
-          {
-          "user":{
-
-            "email":"zhibin.huang@uqconnect.edu.au",
-            "password":"Woainvren1"
-          }
-          }
+        - Login As Admin Role
+        #+begin_src ruby :results pp value
+          require 'rest-client'
+          require 'json'
+          resp = RestClient.post "localhost:3000/users/sign_in", {user: {email: 'zhibin.huang@uqconnect.edu.au', password: 'Woainvren1'}}.to_json, {content_type: :json, accept: :json}
+          auth_token = resp.headers[:authorization]
+          resp = RestClient.get 'localhost:3000/admin',  {authorization: auth_token}
+          pp resp.code
         #+end_src
 
         #+RESULTS:
-        #+BEGIN_SRC js
-        {
-          "error": "You need to sign in or sign up before continuing."
-        }
-        // POST http://localhost:3000/users/sign_in.json
-        // HTTP/1.1 401 Unauthorized
-        // Content-Type: application/json; charset=utf-8
-        // Cache-Control: no-cache
-        // X-Request-Id: f90e9aa4-6fd7-45cf-980c-2f05e7fd1d18
-        // X-Runtime: 0.260847
-        // Transfer-Encoding: chunked
-        // Request duration: 0.266652s
-        #+END_SRC
+        : 200
+
+        - Login As Normal User
+        #+begin_src ruby :results output
+          require 'rest-client'
+          require 'json'
+          resp = RestClient.post "localhost:3000/users/sign_in", {user: {email: 'stacey_langworth@nienow.info', password: 'Woainvren1'}}.to_json, {content_type: :json, accept: :json}
+          auth_token = resp.headers[:authorization]
+          begin
+            resp = RestClient.get 'localhost:3000/admin',  {authorization: auth_token}
+          rescue RestClient::Forbidden => e
+            pp e.response.code
+          end
+
+          resp = RestClient.get 'localhost:3000',  {authorization: auth_token}
+          pp resp.code
+
+        #+end_src
+
+        #+RESULTS:
+        : 403
+        : 200

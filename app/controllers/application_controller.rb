@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery unless: -> { request.format.json? }
+  # protect_from_forgery unless: -> { request.format.json? }
+  protect_from_forgery unless: -> { true }
   rescue_from CanCan::AccessDenied do |e|
     respond_to do |format|
       format.json { head :forbidden }
