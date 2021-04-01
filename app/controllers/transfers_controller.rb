@@ -23,9 +23,24 @@ class TransfersController < ApplicationController
     end
   end
 
+  def search
+    # search_field, search_value = search_params.values_at(:field, :value)
+    render json: Transfer.all
+    # respond_to do |format|
+    #   # format.json { render json: Transfers.search(search_field, search_value) }
+    #   format.json {
+    #     render json: Transfer.all
+    #   }
+    # end
+  end
+
   private
 
   def create_transfer_params
     params.require(:transfer).permit(:seller, :player, :price)
+  end
+
+  def search_params
+    params.require(:search_term).permit(:field, :value)
   end
 end

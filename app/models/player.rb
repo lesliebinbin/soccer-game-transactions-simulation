@@ -7,6 +7,10 @@ class Player < ApplicationRecord
   end
 
   def brief_info
-    "#{first_name} #{last_name}, position: #{position}, market_value: #{market_value}"
+    "full_name #{full_name}, position: #{position}, market_value: #{market_value}"
+  end
+
+  def full_name
+    [first_name, last_name].join(' ')
   end
 end

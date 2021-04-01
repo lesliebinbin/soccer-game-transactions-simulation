@@ -9,5 +9,9 @@ Rails.application.routes.draw do
   root 'home#index'
   resource :team, only: %i[update show]
   resources :players, only: %i[update show index]
-  resources :transfers
+  resources :transfers do
+    collection do
+      get 'search'
+    end
+  end
 end
