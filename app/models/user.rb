@@ -27,10 +27,11 @@ class User < ApplicationRecord
   private
 
   def update_the_values(trading_price, buyer, seller, player)
+    min_inc, max_inc = Rails.configuration.game.dig(:settings, :player, :increment_range).values_at(:min, :max)
     player.team_id = buyer.team.id
     buyer.budget -= trading_price
     seller.budget += trading_price
-    player.market_value = trading_price
+    player.market_value *= (1 + rand(min_inc..max_inc))
     buyer.save
     seller.save
     buyer.team.save

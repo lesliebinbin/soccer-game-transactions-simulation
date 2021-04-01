@@ -7,11 +7,16 @@ default: &default
         min: 18
         max: 35
       market_value: 1000.000
+      increment_range:
+        min: 0.1
+        max: 1
     player_positions:
       goalkeeper: 3
       defender: 6
       midfield: 6
       attacker: 5
+
+
 
 
 

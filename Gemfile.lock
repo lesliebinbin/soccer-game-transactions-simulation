@@ -115,11 +115,11 @@ GEM
     erubi (1.10.0)
     erubis (2.7.0)
     execjs (2.7.0)
-    factory_girl (4.9.0)
-      activesupport (>= 3.0.0)
-    factory_girl_rails (4.9.0)
-      factory_girl (~> 4.9.0)
-      railties (>= 3.0.0)
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.1.0)
+      factory_bot (~> 6.1.0)
+      railties (>= 5.0.0)
     faker (2.17.0)
       i18n (>= 1.6, < 2)
     ffi (1.15.0)
@@ -357,7 +357,7 @@ DEPENDENCIES
   chromedriver-helper
   devise (~> 4.7)
   devise-jwt (~> 0.8.1)
-  factory_girl_rails
+  factory_bot_rails
   faker (~> 2.17)
   haml-rails (~> 2.0)
   jbuilder (~> 2.5)
