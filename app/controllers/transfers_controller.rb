@@ -1,6 +1,18 @@
 class TransfersController < ApplicationController
+  before_action :check_access
   def new
     @transfer = Transfer.new
+  end
+
+  def update
+    head :unauthorized unless current_user.admin_role? || t.check_seller?(current_user)
+  end
+
+  def purchase
+    current_user.buy_player(Transfer.find(params[:id]))
+    head :ok
+  rescue StandardError => e
+    render json: { error: e.message }, status: :not_acceptable
   end
 
   def create
@@ -24,14 +36,8 @@ class TransfersController < ApplicationController
   end
 
   def search
-    # search_field, search_value = search_params.values_at(:field, :value)
-    render json: Transfer.all
-    # respond_to do |format|
-    #   # format.json { render json: Transfers.search(search_field, search_value) }
-    #   format.json {
-    #     render json: Transfer.all
-    #   }
-    # end
+    field, value = search_params.values_at(:search_field, :search_value)
+    render json: Transfer.search(field, value) || []
   end
 
   private
@@ -41,6 +47,6 @@ class TransfersController < ApplicationController
   end
 
   def search_params
-    params.require(:search_term).permit(:field, :value)
+    params.permit(:search_field, :search_value)
   end
 end

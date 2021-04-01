@@ -1,4 +1,5 @@
 class Player < ApplicationRecord
+  validates :market_value, numericality: { greater_than: 0 }
   belongs_to :team
   scope :not_on_trade, -> { where(on_trade: false) }
 

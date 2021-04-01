@@ -1,4 +1,5 @@
 class PlayersController < ApplicationController
+  before_action :check_access
   def index
     players = current_user.players
     respond_to do |format|

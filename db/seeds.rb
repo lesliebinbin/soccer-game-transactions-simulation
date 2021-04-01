@@ -1,5 +1,5 @@
 users = 20.times.map do
-  { email: Faker::Internet.unique.email, password: 'Woainvren1', password_confirmation: 'Woainvren1' }
+  { email: Faker::Internet.unique.email, password: 'goandguess123', password_confirmation: 'goandguess123' }
 end
 User.create(users)
 transfers = (2..21).map do |num|

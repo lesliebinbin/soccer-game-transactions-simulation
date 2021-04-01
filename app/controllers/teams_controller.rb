@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  before_action :check_access
   def show
     respond_to do |format|
       format.html

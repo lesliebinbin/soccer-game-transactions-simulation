@@ -11,7 +11,9 @@ class User < ApplicationRecord
          jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null
 
   def buy_player(transfer)
-    return if transfer.seller_id == id || transfer.price > budget || transfer.buyer_id
+    raise 'You are the seller' if transfer.seller_id == id
+    raise 'Not enough money' if transfer.price > budget
+    raise 'Transaction already done' if transfer.buyer_id
 
     ActiveRecord::Base.transaction do
       player = Player.find(transfer.player_id)

@@ -6,7 +6,9 @@
         #+begin_src ruby :results pp value
           require 'rest-client'
           require 'json'
-          resp = RestClient.post "localhost:3000/users/sign_in", {user: {email: 'zhibin.huang@uqconnect.edu.au', password: 'Woainvren1'}}.to_json, {content_type: :json, accept: :json}
+          resp = RestClient.post "localhost:3000/users/sign_in",
+                                 {user: {email: 'myexample@example.com', password: 'goandguess123'}}.to_json,
+                                 {content_type: :json, accept: :json}
           auth_token = resp.headers[:authorization]
           resp = RestClient.get 'localhost:3000/admin',  {authorization: auth_token}
           pp resp.code
@@ -19,19 +21,39 @@
         #+begin_src ruby :results output
           require 'rest-client'
           require 'json'
-          resp = RestClient.post "localhost:3000/users/sign_in", {user: {email: 'stacey_langworth@nienow.info', password: 'Woainvren1'}}.to_json, {content_type: :json, accept: :json}
+          resp = RestClient.post "localhost:3000/users/sign_in", {user: {email: 'rosanne@harber.info', password: 'goandguess123'}}.to_json, {content_type: :json, accept: :json}
           auth_token = resp.headers[:authorization]
-          begin
-            resp = RestClient.get 'localhost:3000/admin',  {authorization: auth_token}
-          rescue RestClient::Forbidden => e
-            pp e.response.code
-          end
+          # begin
+          #   resp = RestClient.get 'localhost:3000/admin',  {authorization: auth_token}
+          # rescue RestClient::Forbidden => e
+          #   pp e.response.code
+          # end
 
           resp = RestClient.get 'localhost:3000',  {authorization: auth_token}
           pp resp.code
 
+          # check transfers
+          resp = RestClient.get 'localhost:3000/transfers/search', params: {search_field: 'trading_price', search_value: '100 100000'}, authorization: auth_token
+          pp resp.code
+          resp = RestClient.get 'localhost:3000/transfers/search', params: {search_field: 'trading_price', search_value: '100 100000'}, authorization: auth_token
+          resp = RestClient.put 'localhost:3000/transfers/5/purchase', nil, {authorization: auth_token}
+          pp resp.code
+          begin
+            resp = RestClient.put 'localhost:3000/transfers/20/purchase', nil, {authorization: auth_token}
+          rescue RestClient::NotAcceptable =>e
+            pp e.response.code
+            pp e.response.body
+          end
+
+          resp = RestClient.post 'localhost:3000/transfers', {transfer: {seller: 21, player: 395, price: 1210}}.to_json, {authorization: auth_token, content_type: :json, accept: :json}
+          pp resp.body
+
         #+end_src
 
         #+RESULTS:
-        : 403
         : 200
+        : 200
+        : 200
+        : 406
+        : "{\"error\":\"You are the seller\"}"
+        : "{\"notice\":\"Transfer successfully created!\"}"

@@ -1,10 +1,12 @@
 class Transfer < ApplicationRecord
+  validates :price, numericality: { greater_than: 0 }
   belongs_to :seller, class_name: 'User'
   belongs_to :buyer, class_name: 'User', optional: true
   belongs_to :player
   has_one :team, through: :player
   default_scope { where(buyer: nil) }
   scope :done, -> { where.not(buyer: nil) }
+  validates_uniqueness_of :player, conditions: -> { where(buyer: nil) }
   after_create do
     player.update(on_trade: true)
     TransactionPublishJob.perform_later
@@ -31,11 +33,18 @@ class Transfer < ApplicationRecord
     end
   end
 
+  def check_seller?(user)
+    user.id == seller.id
+  end
+
   def as_json(_options = {})
-    { team_country: player.team.country,
+    {
+      t_id: id,
+      team_country: player.team.country,
       team_name: player.team.name,
       player_name: player.full_name,
       market_value: player.market_value.to_f,
-      trading_price: price.to_f }
+      trading_price: price.to_f
+    }
   end
 end
