@@ -17,4 +17,21 @@ class PlayersController < ApplicationController
       format.json { render json: current_player }
     end
   end
+
+  def update
+    player = Player.find(params[:id])
+    if player.current_employer.id != current_user.id
+      head :unauthorized
+    elsif player.update(player_params)
+      head :ok
+    else
+      render json: { errors: player.errors }, status: :not_acceptable
+    end
+  end
+
+  private
+
+  def player_params
+    params.require(:player).permit(:country, :first_name, :last_name)
+  end
 end

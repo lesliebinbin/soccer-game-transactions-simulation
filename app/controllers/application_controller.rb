@@ -12,9 +12,5 @@ class ApplicationController < ActionController::Base
 
   def check_access
     head :unauthorized unless signed_in?
-    # respond_to do |format|
-    #   format.html { redirect_to root_path, alert: 'Please Login First' unless current_user }
-    #   format.json { render json: { error: 'Unauthorised' }, status: :unauthorized }
-    # end
   end
 end
