@@ -12,15 +12,15 @@ RSpec.describe 'Transfers', type: :request do
     expect(response).to have_http_status(:success)
     sign_out u1
   end
-  # it 'should be able to trade his own player only once' do
-  #   sign_in u1
-  #   player = u1.players.first
-  #   headers = { 'ACCEPT' => 'application/json' }
-  #   post transfers_path, params: { transfer: { seller: u1.id, player: player.id, price: 1000 } }, headers: headers
-  #   expect(response).to have_http_status(:success)
-  #   post transfers_path, params: { transfer: { seller: u1.id, player: player.id, price: 1000 } }, headers: headers
-  #   expect(response).to have_http_status(:not_acceptable)
-  # end
+  it 'should be able to trade his own player only once' do
+    sign_in u1
+    player = u1.players.first
+    headers = { 'ACCEPT' => 'application/json' }
+    post transfers_path, params: { transfer: { seller: u1.id, player: player.id, price: 1000 } }, headers: headers
+    expect(response).to have_http_status(:success)
+    post transfers_path, params: { transfer: { seller: u1.id, player: player.id, price: 1000 } }, headers: headers
+    expect(response).to have_http_status(:not_acceptable)
+  end
 
   it 'should affect buyer, seller and player once trasaction succeed' do
     sign_in u1

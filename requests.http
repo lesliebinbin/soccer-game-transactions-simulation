@@ -1,0 +1,77 @@
+# check the root path without login
+GET http://localhost:3000
+Accept: application/json
+
+# sign up for a new user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+"user": {
+  "email": "506120340@qq.com",
+  "password": "example123",
+  "password_confirmation": "example123"
+  }
+}
+
+# sign in with the registered user
+POST http://localhost:3000/users/sign_in
+Content-Type: application/json
+
+
+{
+"user": {
+  "email": "506120340@qq.com",
+  "password": "example123"
+  }
+}
+
+
+# sign out a user
+DELETE http://localhost:3000/users/sign_out
+
+# check the root path again after login
+GET http://localhost:3000
+Accept: application/json
+
+# check the team info
+GET http://localhost:3000/team
+Accept: application/json
+
+# modify the team country
+PUT http://localhost:3000/team
+Content-Type: application/json
+
+{
+"team": {
+  "country": "Australia"
+}
+}
+
+# modify the team name
+PUT http://localhost:3000/team
+Content-Type: application/json
+
+{
+"team": {
+  "name": "I do not wanna play"
+}
+}
+
+# modify the team name and country all at once
+PUT http://localhost:3000/team
+Content-Type: application/json
+
+{
+"team": {
+  "name": "I want to play again",
+  "country": "Brazil"
+}
+}
+
+# check the current transfers
+GET http://localhost:3000/transfers
+Accept: application/json
+
+# sign out a user
+DELETE http://localhost:3000/users/sign_out

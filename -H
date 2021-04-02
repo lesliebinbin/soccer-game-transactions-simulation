@@ -1,0 +1,8 @@
+HTTP/1.1 406 Not Acceptable
+Content-Type: text/html; charset=UTF-8
+X-Web-Console-Session-Id: 948389102a81e9a66430243a79650519
+X-Web-Console-Mount-Point: /__web_console
+X-Request-Id: dd4a7797-8d6e-4ad1-9c59-c5cf7b9fc36b
+X-Runtime: 0.133830
+Content-Length: 159507
+
