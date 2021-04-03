@@ -37,14 +37,4 @@ class Transfer < ApplicationRecord
     user.id == seller.id
   end
 
-  def as_json(_options = {})
-    {
-      t_id: id,
-      team_country: player.team.country,
-      team_name: player.team.name,
-      player_name: player.full_name,
-      market_value: player.market_value.to_f,
-      trading_price: price.to_f
-    }
-  end
 end

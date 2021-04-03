@@ -16,8 +16,8 @@ Content-Type: application/json
 
 # sign in with the registered user
 POST http://localhost:3000/users/sign_in
+Accept: application/json
 Content-Type: application/json
-
 
 {
 "user": {
@@ -69,9 +69,136 @@ Content-Type: application/json
 }
 }
 
+#check the players
+GET http://localhost:3000/players
+Accept: application/json
+
+# modify the player name
+PUT http://localhost:3000/players/401
+Content-Type: application/json
+
+{
+  "player": {
+    "first_name": "Awesome",
+    "last_name": "Fantastic"
+  }
+}
+
+# modify the player country
+PUT http://localhost:3000/players/401
+Content-Type: application/json
+{
+  "player": {
+    "country": "Itali"
+  }
+}
+
+# cannot modify the player market_value
+PUT http://localhost:3000/players/401
+Content-Type: application/json
+{
+  "player": {
+    "market_value": 3000000
+  }
+}
+
+# cannot check other user's player, forget to constraint, vulnerable
+GET http://localhost:3000/players/1
+Accept: application/json
+
+# cannot modify other user's player
+PUT http://localhost:3000/players/1
+Content-Type: application/json
+{
+  "player": {
+    "country": "Itali"
+  }
+}
+
+
 # check the current transfers
 GET http://localhost:3000/transfers
 Accept: application/json
 
-# sign out a user
+# search for transfers based on trading price
+GET http://localhost:3000/transfers/search?search_field=trading_price&search_value=1000
+GET http://localhost:3000/transfers/search?search_field=trading_price&search_value=500 1002
+# search for transfers based on market_value
+GET http://localhost:3000/transfers/search?search_field=market_value&search_value=1000
+GET http://localhost:3000/transfers/search?search_field=market_value&search_value=500 1002
+# search for transfers based on team_name
+GET http://localhost:3000/transfers/search?search_field=team_name&search_value=Oklahoma druids
+# search for transfers based on team_country
+GET http://localhost:3000/transfers/search?search_field=player_name&search_value=Dennis Connelly
+# search for transfers based on player name
+
+
+# make a new transfer
+# should be optimised, seller id is redundent
+# should use current_user.id
+POST http://localhost:3000/transfers
+Content-Type: application/json
+Accept: application/json
+
+{
+  "transfer": {
+    "seller": 22,
+    "player": 401,
+    "price": 1200
+
+  }
+}
+
+# should not be able to transfer the same player twice
+POST http://localhost:3000/transfers
+Content-Type: application/json
+Accept: application/json
+
+{
+  "transfer": {
+    "seller": 22,
+    "player": 402,
+    "price": 1200
+
+  }
+}
+
+# cannot buy the transfer where the user is the seller
+PUT http://localhost:3000/transfers/21/purchase
+
+# sign out the seller
 DELETE http://localhost:3000/users/sign_out
+
+# sign up for a new user as buyer
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+"user": {
+  "email": "another-user@example.com",
+  "password": "example123",
+  "password_confirmation": "example123"
+  }
+}
+
+# sign in the buyer
+POST http://localhost:3000/users/sign_in
+Accept: application/json
+Content-Type: application/json
+
+{
+"user": {
+  "email": "another-user@example.com",
+  "password": "example123"
+  }
+}
+
+# buy the player
+PUT http://localhost:3000/transfers/22/purchase
+
+# check current team
+GET http://localhost:3000/team
+Accept: application/json
+
+# should not be able to purchase a done transfer
+PUT http://localhost:3000/transfers/22/purchase

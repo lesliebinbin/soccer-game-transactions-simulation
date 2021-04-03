@@ -79,3 +79,8 @@ gem "rails_admin", "~> 2.1"
 gem "turbolinks", "~> 5.2"
 
 gem "stimulus_reflex", "~> 3.4"
+
+gem "aws-sdk-rails", "~> 3.6"
+
+gem "graphql", "~> 1.12"
+gem 'graphiql-rails', group: :development

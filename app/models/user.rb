@@ -7,7 +7,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable,
-         # :confirmable,
+         #:confirmable,
          jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null
 
   def buy_player(transfer)

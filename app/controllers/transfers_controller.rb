@@ -1,7 +1,23 @@
 class TransfersController < ApplicationController
   before_action :check_access
   def index
-    render json: Transfer.all
+    query = %q(
+      {
+  transactions {
+    id
+    price
+    player {
+      country
+      age
+      marketValue
+      fullName
+      currentTeam
+      teamCountry
+    }
+  }
+}
+    )
+    render json: SoccerGameSchema.execute(query)
   end
 
   def new
