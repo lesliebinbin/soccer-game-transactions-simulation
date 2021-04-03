@@ -23,4 +23,4 @@ Rails.start();
 ActiveStorage.start();
 Turbolinks.start();
 
-import "controllers"
+//import "controllers"

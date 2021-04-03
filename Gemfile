@@ -84,3 +84,7 @@ gem "aws-sdk-rails", "~> 3.6"
 
 gem "graphql", "~> 1.12"
 gem 'graphiql-rails', group: :development
+
+gem "rswag", "~> 2.4"
+
+gem "rswag-specs", "~> 2.4", :groups => [:test, :development]
