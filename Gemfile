@@ -88,3 +88,5 @@ gem 'graphiql-rails', group: :development
 gem "rswag", "~> 2.4"
 
 gem "rswag-specs", "~> 2.4", :groups => [:test, :development]
+
+gem "multi_json", "~> 1.15"

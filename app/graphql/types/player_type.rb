@@ -14,9 +14,6 @@ module Types
     field :full_name, String, null: false
     field :current_team, String, null: false
     field :team_country, String, null: false
-    def full_name
-      [object.first_name, object.last_name].compact.join(" ")
-    end
     def current_team
       object.team.name
     end
