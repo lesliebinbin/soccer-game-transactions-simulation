@@ -11,6 +11,8 @@
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {
+    "babel-preset-cljs": "^2.0.1",
+    "shadow-cljs": "~2.10.13",
     "webpack-dev-server": "^3.11.2"
   }
 }
